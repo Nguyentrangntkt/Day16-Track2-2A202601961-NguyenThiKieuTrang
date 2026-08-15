@@ -1,0 +1,25 @@
+{
+  "cloud": "aws",
+  "instance_type": "t3.small",
+  "dataset_rows": 284807,
+  "load_time_seconds": 2.1106033270002627,
+  "training_time_seconds": 7.22394869000027,
+  "auc_roc": 0.8775769505185305,
+  "accuracy": 0.9986482216214319,
+  "precision": 0.591304347826087,
+  "recall": 0.6938775510204082,
+  "f1_score": 0.6384976525821596,
+  "inference_latency_ms_one_row": 1.2257282810014658,
+  "inference_throughput_rows_per_second": 113617.97818155689,
+  "best_iteration": null,
+  "model_parameters": {
+    "learning_rate": 0.05,
+    "n_estimators": 200,
+    "n_jobs": -1,
+    "num_leaves": 31,
+    "objective": "binary",
+    "random_state": 42
+  },
+  "batch_prediction_rows": 1000,
+  "batch_prediction_time_seconds": 0.008801424000012048
+}

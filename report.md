@@ -1,0 +1,7 @@
+# Day16 AWS CPU Benchmark Report
+
+Hạ tầng benchmark được triển khai trên AWS bằng Terraform. Compute Node sử dụng `t3.small` thay cho `t3.medium` do giới hạn của tài khoản AWS Free Plan. Benchmark sử dụng bộ dữ liệu Credit Card Fraud Detection gồm 284,807 bản ghi. Thời gian đọc dữ liệu khoảng 2.11 giây và thời gian huấn luyện LightGBM khoảng 7.22 giây. Mô hình đạt AUC-ROC 0.878, Accuracy 0.9986, Precision 0.591, Recall 0.694 và F1-score 0.638. Do dữ liệu mất cân bằng, Accuracy không được dùng riêng lẻ để đánh giá chất lượng mô hình.
+
+Độ trễ inference cho một mẫu khoảng 1.23 ms; throughput batch 1,000 mẫu đạt khoảng 113 nghìn mẫu/giây. Trong quá trình training, `top` ghi nhận tiến trình `python3` sử dụng khoảng 200% CPU trên instance 2 vCPU. Máy có khoảng 1.9 GiB RAM và còn khoảng 1.5 GiB khả dụng sau benchmark; network không ghi nhận lỗi hoặc packet drop. CloudWatch ghi nhận biến động CPU và lưu lượng mạng trong thời gian benchmark. Giá trị CPU trên CloudWatch thấp hơn quan sát tức thời bằng `top` do metric được tổng hợp theo khoảng thời gian.
+
+Sau khi hoàn tất benchmark, toàn bộ hạ tầng được xóa bằng `terraform destroy`. Terraform trả về `Destroy complete!`; AWS Console xác nhận EC2 đã `Terminated`, NAT Gateway `Deleted`, đồng thời không còn Application Load Balancer và Elastic IP của lab.
